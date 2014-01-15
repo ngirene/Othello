@@ -1,4 +1,5 @@
-- Two-Player Othello
+# Two-Player Othello
+
 A simple two-player simulation of Othello with a GUI. Players must set up
 a game by inputting the board size, the placement of the four center pieces, 
 the player to make the first move, and the goal of the game. When the game 
