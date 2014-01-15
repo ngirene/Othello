@@ -1,4 +1,5 @@
-# Lab 3 Project 5 Irene Ng 95413809
+# ICS 32 Spring 2013
+# Lab 3 Project 5 Irene Ng 
 
 import tkinter
 import othello
