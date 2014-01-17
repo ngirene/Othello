@@ -87,13 +87,13 @@ class OthelloApplication:
                     self.canvas.create_rectangle(
                         start,end, start+vertical, end+horizontal)
 
-                elif self.board[col][row] == "[●]":
+                elif self.board[col][row] == othello.black_piece:
                     self.canvas.create_rectangle(
                         start,end, start+vertical, end+horizontal)
                     self.canvas.create_oval(
                         start, end, start+vertical, end+horizontal, fill="#000000")
                        
-                elif self.board[col][row] == "[○]":
+                elif self.board[col][row] == othello.white_piece:
                     self.canvas.create_rectangle(
                         start,end, start+vertical, end+horizontal)
                     self.canvas.create_oval(
@@ -269,6 +269,10 @@ class OthelloSetup:
         self.player = ''
         self.disc = ''
         self.win = ''
+    
+    def start(self)->None:
+        '''Initiates the customization window'''
+        self.dialog_window.mainloop()        
 
     def was_ok_clicked(self)->bool:
         '''Returns True if the OK button is clicked'''
@@ -309,7 +313,8 @@ class OthelloSetup:
             app.start()
                             
 if __name__ == "__main__":
-    setup = OthelloSetup()
+    print('test')
+    setup = OthelloSetup().start()
 
     
     

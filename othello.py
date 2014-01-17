@@ -1,6 +1,10 @@
 # ICS 32 Spring 2013
 # Lab 3 Project 5 Irene Ng 
 
+black_piece = '['+u"\u25CF"+']'
+white_piece = '['+u"\u25CB"+']'
+
+
 class Othello:
     '''Represents a game of Othello.'''
 
@@ -49,16 +53,16 @@ class Othello:
         center_row = int(self.row/2)-1
 
         if self.disc.upper() == "BLACK":
-            board[center_col][center_row] = "[●]"
-            board[center_col+1][center_row] = "[○]"
-            board[center_col+1][center_row+1] = "[●]"
-            board[center_col][center_row+1] = "[○]"
+            board[center_col][center_row] = black_piece
+            board[center_col+1][center_row] = white_piece
+            board[center_col+1][center_row+1] = white_piece
+            board[center_col][center_row+1] = black_piece
             
         if self.disc.upper() == "WHITE":
-            board[center_col][center_row] = "[○]"
-            board[center_col+1][center_row] = "[●]"
-            board[center_col+1][center_row+1] = "[○]"
-            board[center_col][center_row+1] = "[●]"
+            board[center_col][center_row] = white_piece
+            board[center_col+1][center_row] = black_piece
+            board[center_col+1][center_row+1] = white_piece
+            board[center_col][center_row+1] = black_piece
 
         return board
     
@@ -71,9 +75,9 @@ class Othello:
         for row in range(self.row):
             for col in range(self.col):
                 
-                if board[col][row] == "[○]":
+                if board[col][row] == white_piece:
                     white_score+=1
-                if board[col][row] == "[●]":
+                if board[col][row] == black_piece:
                     black_score+=1
 
         return (black_score, white_score)
@@ -111,7 +115,7 @@ class Othello:
         player, opponent = self.determine_opponent()
 
         if self.require_valid_cell(col_to_check,row_to_check):
-             if board[col_to_check][row_to_check] == "[ ]":                
+            if board[col_to_check][row_to_check] == "[ ]":                
                 for (x,y) in eight_directions:
                     col, row = col_to_check, row_to_check
                     col+=x
@@ -144,12 +148,12 @@ class Othello:
         '''Return the player's piece and the corresponding opponent's piece'''
        
         if self.player.upper() == "BLACK":
-            player = "[●]"
-            opponent = "[○]"
+            player = black_piece
+            opponent = white_piece
             return (player, opponent)
         elif self.player.upper() == "WHITE":
-            player = "[○]"
-            opponent = "[●]"
+            player = white_piece
+            opponent = black_piece
             return (player, opponent)
     
     def make_move(self, board:[list], col:int, row:int, player:str)->bool:
@@ -157,16 +161,16 @@ class Othello:
         flipping_discs = self.valid_move(board, col, row, player)
         if len(flipping_discs)!=0:
             if self.player.upper() == "WHITE":
-                board[col][row] = "[○]"
+                board[col][row] = white_piece
                 for disc in flipping_discs:
                     (flip_col, flip_row) = disc
-                    board[flip_col][flip_row] = "[○]"
+                    board[flip_col][flip_row] = white_piece
 
             elif self.player.upper() == "BLACK":
-                board[col][row] = "[●]"
+                board[col][row] = black_piece
                 for disc in flipping_discs:
                     (flip_col, flip_row) = disc
-                    board[flip_col][flip_row] = "[●]"
+                    board[flip_col][flip_row] = black_piece
             self.opposite_player()
 
             return True
@@ -222,8 +226,6 @@ class Othello:
         '''Returns True if the board is still playable'''
         opponent_cells = 0
         player, opponent = self.determine_opponent()
-        
-
         for row in range(self.row):
             for col in range(self.col):
                 if board[col][row] == opponent:
