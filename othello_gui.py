@@ -313,7 +313,6 @@ class OthelloSetup:
             app.start()
                             
 if __name__ == "__main__":
-    print('test')
     setup = OthelloSetup().start()
 
     
